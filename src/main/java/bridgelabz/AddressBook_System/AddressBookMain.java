@@ -1,12 +1,14 @@
 package bridgelabz.AddressBook_System;
 import java.io.IOException;
+
 import java.util.Scanner;
-import static com.addressbook.AddressBook.addressBookSystem;
+import static com.addressbook.addressBookSystem;
 import static com.addressbook.AddressBook.person;
 public class AddressBookMain {
 
 	 AddressBook addressBook = new AddressBook();
 	    private static final Scanner sc = new Scanner(System.in);
+		private static final String person = null;
 
 	    /**
 	     * Create Method for Implementing the Address Book
