@@ -1,51 +1,62 @@
 package bridgelabz.AddressBook_System;
-import java.io.IOException;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
+import java.io.IOException;
 import java.util.Scanner;
-import static com.addressbook.addressBookSystem;
+
+import static com.addressbook.AddressBook.addressBookSystem;
 import static com.addressbook.AddressBook.person;
 public class AddressBookMain {
 
 	 AddressBook addressBook = new AddressBook();
 	    private static final Scanner sc = new Scanner(System.in);
-		private static final String person = null;
 
 	    /**
 	     * Create Method for Implementing the Address Book
 	     */
-	    public static void addressBook() throws IOException {
+	    public static void addressBook() throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
 	        boolean option = false;
 	        while (true) {
-	            System.out.println("1.Create\n, 2.Edit\n, 3.Delete\n, 4.Write Data To File\n, 5.Read Data from Console\n,  6.Exit the loop");
+	            System.out.println("1.Create\n, 2.Edit\n, 3.Delete\n, 4.Write Data To File\n, 5.Read Data from Console\n, " +
+	                    "6.Write Contacts to CSV\n, 7.Read Contacts from CSV\n, 8.Exit the loop");
 	            System.out.println("Enter the choice What you want do");
 	            int choice = sc.nextInt();
 	            switch (choice) {
-	                case 1:{
+	                case 1 -> {
 	                    AddressBook addContact = new AddressBook(person);
 	                    Scanner consoleInputReader = new Scanner(System.in);
 	                    addContact.addContactDetails(consoleInputReader);
 	                    option = true;
 	                }
-	                case 2: {
+	                case 2 -> {
 	                    AddressBook editContact = new AddressBook();
 	                    editContact.editContactDetailsByFirstName();
 	                    option = true;
 	                }
-	                case 3: {
+	                case 3 -> {
 	                    AddressBook deleteContact = new AddressBook();
 	                    deleteContact.deleteContactByFirstName();       //Calling Delete Contact Method
 	                    option = true;
 	                }
-	                case 4: {
+	                case 4 -> {
 	                    AddressBook addressBook = new AddressBook();
 	                    addressBook.writeAddressBook(AddressBook.IOService.FILE_IO);
 	                }
-	                case 5: {
+	                case 5 -> {
 	                    AddressBook addressBook = new AddressBook();
 	                    addressBook.readAddressBook(AddressBook.IOService.CONSOLE_IO);
 	                }
-	                case 6: System.exit(0);
-	                default: {
+	                case 6 -> {
+	                    AddressBook writeCSV = new AddressBook();
+	                    writeCSV.writeAddressBookContactsToCSV();
+	                }
+	                case 7 -> {
+	                    AddressBook readCSV = new AddressBook();
+	                    readCSV.readAddressBookContactsFromCSV();
+	                }
+	                case 8 -> System.exit(0);
+	                default -> {
 	                    System.out.println("Choice is incorrect");
 	                }
 	            }
@@ -55,7 +66,7 @@ public class AddressBookMain {
 	    /**
 	     * Create Main Method for Implementing the Address Book Main System
 	     */
-	    public static void main (String[] args) throws IOException {
+	    public static void main (String[] args) throws IOException, CsvRequiredFieldEmptyException, CsvDataTypeMismatchException {
 	        System.out.println("Welcome to Address Book Program in AddressBook in Main Class");
 	        System.out.println("Enter the Name of the Address Book");
 	        sc.nextLine();
@@ -68,5 +79,4 @@ public class AddressBookMain {
 	            addAddressBook.addressBook();
 	        }
 	    }
-
 }
